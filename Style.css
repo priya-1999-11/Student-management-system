@@ -1,31 +1,688 @@
+/* =========================================
+   GLOBAL
+   ========================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-    margin: 0;
+    background: #f4f6f8;
+    color: #222;
 }
 
-.container {
-    text-align: center;
-    margin-top: 150px;
+
+/* =========================================
+   NAVBAR
+   ========================================= */
+
+.navbar {
+    height: 70px;
+    background: #ffffff;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 8%;
+
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
-h1 {
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2563eb;
+}
+
+.navbar a {
+    text-decoration: none;
     color: #333;
+
+    margin-left: 25px;
+
+    font-weight: 500;
 }
 
-p {
+.navbar a:hover {
+    color: #2563eb;
+}
+
+
+/* =========================================
+   HOME PAGE
+   ========================================= */
+
+.hero {
+    min-height: calc(100vh - 70px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 40px 20px;
+}
+
+.hero-content {
+    max-width: 750px;
+}
+
+.badge {
+    display: inline-block;
+
+    padding: 8px 14px;
+
+    border-radius: 20px;
+
+    background: #e8f0ff;
+
+    color: #2563eb;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: 48px;
+
+    line-height: 1.2;
+
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+
+    color: #666;
+
+    line-height: 1.6;
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================================
+   BUTTONS
+   ========================================= */
+
+.primary-btn {
+    border: none;
+
+    background: #2563eb;
+
+    color: white;
+
+    padding: 13px 25px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+.primary-btn:hover {
+    background: #1d4ed8;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   LOGIN PAGE
+   ========================================= */
+
+.login-page {
+    min-height: 100vh;
+
+    background: #f4f6f8;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 30px;
+}
+
+.login-wrapper {
+    width: 100%;
+
+    max-width: 1000px;
+
+    min-height: 600px;
+
+    background: white;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.10);
+}
+
+
+/* =========================================
+   LOGIN LEFT SIDE
+   ========================================= */
+
+.login-info {
+    background: #2563eb;
+
+    color: white;
+
+    padding: 60px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+.login-logo {
+    color: white;
+
+    font-size: 30px;
+
+    margin-bottom: 35px;
+}
+
+.login-info .badge {
+    width: fit-content;
+
+    background: rgba(255, 255, 255, 0.15);
+
+    color: white;
+
+    margin-bottom: 25px;
+}
+
+.login-info h1 {
+    font-size: 40px;
+
+    line-height: 1.2;
+
+    margin-bottom: 20px;
+}
+
+.login-info > p {
+    font-size: 17px;
+
+    line-height: 1.7;
+
+    color: rgba(255, 255, 255, 0.85);
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================================
+   LOGIN FEATURES
+   ========================================= */
+
+.login-features {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+.login-features div {
+    font-size: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.login-features span {
+    width: 24px;
+
+    height: 24px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.2);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/* =========================================
+   LOGIN RIGHT SIDE
+   ========================================= */
+
+.login-card {
+    background: white;
+
+    padding: 55px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+.login-card h2 {
+    font-size: 30px;
+
+    margin-bottom: 8px;
+}
+
+.login-subtitle {
+    color: #777;
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================================
+   LOGIN FORM
+   ========================================= */
+
+.login-card label {
+    display: block;
+
+    font-weight: 600;
+
+    margin-top: 18px;
+
+    margin-bottom: 8px;
+}
+
+.login-card input {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 7px;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+.login-card input:focus {
+    border-color: #2563eb;
+
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.login-btn {
+    width: 100%;
+
+    margin-top: 25px;
+
+    padding: 14px;
+}
+
+
+/* =========================================
+   LOGIN ERROR MESSAGE
+   ========================================= */
+
+.error-message {
+    color: #dc2626;
+
+    text-align: center;
+
+    margin-top: 15px;
+
+    min-height: 20px;
+}
+
+
+/* =========================================
+   DEMO ACCOUNTS
+   ========================================= */
+
+.demo-accounts {
+    background: #f8fafc;
+
+    border-radius: 10px;
+
+    padding: 18px;
+
+    margin-top: 25px;
+}
+
+.demo-accounts h3 {
+    font-size: 15px;
+
+    margin-bottom: 12px;
+}
+
+.demo-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 7px 0;
+
+    font-size: 13px;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.demo-row:last-child {
+    border-bottom: none;
+}
+
+.demo-row span {
     color: #666;
 }
 
-button {
-    padding: 10px 25px;
-    border: none;
-    background-color: #333;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
+.demo-row strong {
+    color: #333;
 }
 
-button:hover {
-    background-color: #555;
+
+/* =========================================
+   BACK TO HOME
+   ========================================= */
+
+.back-home {
+    text-align: center;
+
+    margin-top: 22px;
+
+    text-decoration: none;
+
+    color: #2563eb;
+
+    font-size: 14px;
+}
+
+.back-home:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================
+   DASHBOARD
+   ========================================= */
+
+.dashboard {
+    min-height: 100vh;
+
+    background: #f4f6f8;
+}
+
+
+/* =========================================
+   DASHBOARD NAVBAR
+   ========================================= */
+
+.dashboard-nav {
+    background: white;
+
+    padding: 18px 7%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-nav button {
+    border: none;
+
+    background: #dc2626;
+
+    color: white;
+
+    padding: 9px 16px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+.dashboard-nav button:hover {
+    background: #b91c1c;
+}
+
+
+/* =========================================
+   DASHBOARD CONTENT
+   ========================================= */
+
+.dashboard-content {
+    padding: 40px 7%;
+}
+
+.dashboard-content h1 {
+    font-size: 32px;
+
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #666;
+
+    margin-bottom: 30px;
+
+    font-size: 16px;
+}
+
+
+/* =========================================
+   DASHBOARD CARDS
+   ========================================= */
+
+.card-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+
+    gap: 20px;
+}
+
+.card {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.07);
+
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.10);
+}
+
+.card h3 {
+    margin-bottom: 12px;
+
+    font-size: 18px;
+}
+
+.card p {
+    color: #666;
+
+    line-height: 1.5;
+}
+
+.stat-number {
+    font-size: 32px !important;
+
+    font-weight: bold;
+
+    color: #2563eb !important;
+}
+
+
+/* =========================================
+   TABLE
+   ========================================= */
+
+.table-container {
+    background: white;
+
+    padding: 25px;
+
+    margin-top: 30px;
+
+    border-radius: 10px;
+
+    overflow-x: auto;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.table-container h2 {
+    font-size: 22px;
+}
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 14px;
+
+    text-align: left;
+
+    border-bottom: 1px solid #eee;
+}
+
+th {
+    background: #f8fafc;
+
+    font-weight: bold;
+
+    color: #333;
+}
+
+td {
+    color: #555;
+}
+
+tr:hover {
+    background: #fafafa;
+}
+
+
+/* =========================================
+   RESPONSIVE - TABLET
+   ========================================= */
+
+@media (max-width: 750px) {
+
+    .login-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .login-info {
+        padding: 40px;
+    }
+
+    .login-info h1 {
+        font-size: 30px;
+    }
+
+    .login-card {
+        padding: 40px;
+    }
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+}
+
+
+/* =========================================
+   RESPONSIVE - MOBILE
+   ========================================= */
+
+@media (max-width: 450px) {
+
+    .login-page {
+        padding: 15px;
+    }
+
+    .login-info {
+        padding: 30px;
+    }
+
+    .login-card {
+        padding: 30px;
+    }
+
+    .login-info h1 {
+        font-size: 27px;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .navbar {
+        padding: 0 5%;
+    }
+
+    .navbar a {
+        margin-left: 10px;
+    }
+
+    .dashboard-content {
+        padding: 25px 5%;
+    }
+
+    .dashboard-content h1 {
+        font-size: 27px;
+    }
+
 }
