@@ -3,26 +3,414 @@
 
 <head>
     <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Teacher Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+
+    <!-- Shared project CSS -->
+    <link rel="stylesheet" href="Style.css">
+
+    <!-- Teacher-specific CSS -->
+    <link rel="stylesheet" href="teacher.css">
 </head>
 
-<body>
+<body class="teacher-dashboard">
 
-    <div class="container">
+    <!-- =========================
+         NAVIGATION
+         ========================= -->
 
-        <h1>Teacher Dashboard</h1>
+    <nav class="teacher-nav">
 
-        <p>Welcome to the Teacher Dashboard</p>
+        <div class="logo">
+            Teacher Portal
+        </div>
 
-        <h2>Teacher Information</h2>
+        <div class="teacher-nav-right">
 
-        <p>Name: John</p>
-        <p>Department: Computer Science</p>
+            <span id="teacherName">
+                John
+            </span>
 
-        <button>View Students</button>
+            <button onclick="logout()">
+                Logout
+            </button>
 
-    </div>
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         MAIN CONTENT
+         ========================= -->
+
+    <main class="teacher-content">
+
+        <h1>
+            Teacher Dashboard
+        </h1>
+
+        <p class="teacher-subtitle">
+            Welcome back,
+            <span id="welcomeName">John</span> 👋
+        </p>
+
+
+        <!-- =========================
+             STATISTICS
+             ========================= -->
+
+        <section class="teacher-stats">
+
+            <div class="teacher-stat-card">
+
+                <h3>
+                    Total Students
+                </h3>
+
+                <p class="teacher-stat-number">
+                    45
+                </p>
+
+            </div>
+
+
+            <div class="teacher-stat-card">
+
+                <h3>
+                    My Courses
+                </h3>
+
+                <p class="teacher-stat-number">
+                    4
+                </p>
+
+            </div>
+
+
+            <div class="teacher-stat-card">
+
+                <h3>
+                    Average Attendance
+                </h3>
+
+                <p class="teacher-stat-number">
+                    87%
+                </p>
+
+            </div>
+
+
+            <div class="teacher-stat-card">
+
+                <h3>
+                    Pending Assignments
+                </h3>
+
+                <p class="teacher-stat-number">
+                    6
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             TEACHER INFORMATION
+             ========================= -->
+
+        <section class="teacher-section">
+
+            <h2>
+                Teacher Information
+            </h2>
+
+            <div class="teacher-info-grid">
+
+                <div>
+                    <strong>Name</strong>
+                    <p>John</p>
+                </div>
+
+                <div>
+                    <strong>Department</strong>
+                    <p>Computer Science</p>
+                </div>
+
+                <div>
+                    <strong>Teacher ID</strong>
+                    <p>TEA001</p>
+                </div>
+
+                <div>
+                    <strong>Email</strong>
+                    <p>john@example.com</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             COURSES
+             ========================= -->
+
+        <section class="teacher-section">
+
+            <h2>
+                My Courses
+            </h2>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Course</th>
+                            <th>Students</th>
+                            <th>Attendance</th>
+                            <th>Status</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>Web Development</td>
+                            <td>30</td>
+                            <td>92%</td>
+                            <td>Active</td>
+                        </tr>
+
+                        <tr>
+                            <td>Database Systems</td>
+                            <td>28</td>
+                            <td>85%</td>
+                            <td>Active</td>
+                        </tr>
+
+                        <tr>
+                            <td>Computer Networks</td>
+                            <td>25</td>
+                            <td>84%</td>
+                            <td>Active</td>
+                        </tr>
+
+                        <tr>
+                            <td>Artificial Intelligence</td>
+                            <td>32</td>
+                            <td>90%</td>
+                            <td>Active</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             STUDENTS
+             ========================= -->
+
+        <section class="teacher-section" id="students">
+
+            <h2>
+                My Students
+            </h2>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Student ID</th>
+                            <th>Name</th>
+                            <th>Course</th>
+                            <th>Attendance</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>STU001</td>
+                            <td>Abdul</td>
+                            <td>Web Development</td>
+                            <td>92%</td>
+                        </tr>
+
+                        <tr>
+                            <td>STU002</td>
+                            <td>Rahul</td>
+                            <td>Database Systems</td>
+                            <td>88%</td>
+                        </tr>
+
+                        <tr>
+                            <td>STU003</td>
+                            <td>Priya</td>
+                            <td>Computer Networks</td>
+                            <td>90%</td>
+                        </tr>
+
+                        <tr>
+                            <td>STU004</td>
+                            <td>Sneha</td>
+                            <td>Artificial Intelligence</td>
+                            <td>86%</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             ASSIGNMENTS
+             ========================= -->
+
+        <section class="teacher-section">
+
+            <h2>
+                Assignments
+            </h2>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Assignment</th>
+                            <th>Course</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>HTML & CSS Project</td>
+                            <td>Web Development</td>
+                            <td>15 Aug 2026</td>
+                            <td>Pending Review</td>
+                        </tr>
+
+                        <tr>
+                            <td>SQL Queries</td>
+                            <td>Database Systems</td>
+                            <td>16 Aug 2026</td>
+                            <td>Pending Review</td>
+                        </tr>
+
+                        <tr>
+                            <td>Network Design</td>
+                            <td>Computer Networks</td>
+                            <td>18 Aug 2026</td>
+                            <td>Submitted</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             RECENT ACTIVITIES
+             ========================= -->
+
+        <section class="teacher-section">
+
+            <h2>
+                Recent Activities
+            </h2>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Activity</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>Reviewed Web Development Assignment</td>
+                            <td>11 Aug 2026</td>
+                            <td>Completed</td>
+                        </tr>
+
+                        <tr>
+                            <td>Marked Database Assignment</td>
+                            <td>10 Aug 2026</td>
+                            <td>Completed</td>
+                        </tr>
+
+                        <tr>
+                            <td>Posted Computer Networks Quiz</td>
+                            <td>09 Aug 2026</td>
+                            <td>Completed</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         JAVASCRIPT
+         ========================= -->
+
+    <script>
+
+        function logout() {
+
+            localStorage.removeItem("loggedInUser");
+            localStorage.removeItem("userRole");
+
+            window.location.href = "login.html";
+
+        }
+
+    </script>
 
 </body>
 
