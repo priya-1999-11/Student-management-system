@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - Student Management System</title>
+
+    <link rel="stylesheet" href="Style.css">
+</head>
+
+<body class="login-page">
+
+    <div class="login-wrapper">
+
+        <!-- Left Side -->
+        <div class="login-info">
+
+            <div class="logo login-logo">
+                SMS
+            </div>
+
+            <span class="badge">
+                COLLEGE MANAGEMENT
+            </span>
+
+            <h1>
+                Student Management System
+            </h1>
+
+            <p>
+                Manage students, teachers, courses and
+                academic information from one simple platform.
+            </p>
+
+            <div class="login-features">
+
+                <div>
+                    <span>✓</span>
+                    Student Management
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Teacher Management
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Course Management
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Right Side -->
+        <div class="login-card">
+
+            <h2>Welcome Back 👋</h2>
+
+            <p class="login-subtitle">
+                Login to access your dashboard
+            </p>
+
+
+            <form id="loginForm">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Enter your username"
+                    required
+                >
+
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+
+                <button
+                    type="submit"
+                    class="primary-btn login-btn"
+                >
+                    Login
+                </button>
+
+
+                <p
+                    id="message"
+                    class="error-message"
+                ></p>
+
+            </form>
+
+
+            <!-- Demo Accounts -->
+
+            <div class="demo-accounts">
+
+                <h3>Demo Login</h3>
+
+                <div class="demo-row">
+                    <span>Student</span>
+                    <strong>student / 1234</strong>
+                </div>
+
+                <div class="demo-row">
+                    <span>Teacher</span>
+                    <strong>teacher / 1234</strong>
+                </div>
+
+                <div class="demo-row">
+                    <span>Admin</span>
+                    <strong>admin / 1234</strong>
+                </div>
+
+            </div>
+
+
+            <a
+                href="index.html"
+                class="back-home"
+            >
+                ← Back to Home
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        document
+            .getElementById("loginForm")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+                const username =
+                    document.getElementById("username").value.trim();
+
+                const password =
+                    document.getElementById("password").value.trim();
+
+                const message =
+                    document.getElementById("message");
+
+
+                if (
+                    username === "student" &&
+                    password === "1234"
+                ) {
+
+                    window.location.href = "student.html";
+
+                }
+
+                else if (
+                    username === "teacher" &&
+                    password === "1234"
+                ) {
+
+                    /*
+                     * Teacher dashboard will be connected
+                     * when your teammate finishes the module.
+                     */
+
+                    window.location.href = "teacher.html";
+
+                }
+
+                else if (
+                    username === "admin" &&
+                    password === "1234"
+                ) {
+
+                    /*
+                     * Admin dashboard will be connected
+                     * when the admin module is completed.
+                     */
+
+                    window.location.href = "admin.html";
+
+                }
+
+                else {
+
+                    message.textContent =
+                        "Invalid username or password.";
+
+                }
+
+            });
+
+    </script>
+
+</body>
+
+</html>
