@@ -27,15 +27,28 @@
             Teacher Portal
         </div>
 
-        <div class="teacher-nav-right">
+        <!-- Hamburger button (mobile only) -->
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+            ☰
+        </button>
 
-            <span id="teacherName">
-                John
-            </span>
+        <div class="teacher-nav-links" id="teacherNavLinks">
 
-            <button onclick="logout()">
-                Logout
-            </button>
+            <a href="teacher.html" class="active">Dashboard</a>
+            <a href="teacher-attendance.html">Attendance</a>
+            <a href="teacher-grades.html">Grades</a>
+
+            <div class="teacher-nav-right">
+
+                <span id="teacherName">
+                    Teacher
+                </span>
+
+                <button onclick="logout()">
+                    Logout
+                </button>
+
+            </div>
 
         </div>
 
@@ -54,7 +67,7 @@
 
         <p class="teacher-subtitle">
             Welcome back,
-            <span id="welcomeName">John</span> 👋
+            <span id="welcomeName">Teacher</span> 👋
         </p>
 
 
@@ -132,7 +145,7 @@
 
                 <div>
                     <strong>Name</strong>
-                    <p>John</p>
+                    <p id="infoName">John</p>
                 </div>
 
                 <div>
@@ -229,9 +242,13 @@
                 My Students
             </h2>
 
+            <!-- Search / filter box -->
+            <input type="text" id="studentSearch" class="search-box" placeholder="Search by name or course..."
+                onkeyup="filterStudents()">
+
             <div class="table-container">
 
-                <table>
+                <table id="studentsTable">
 
                     <thead>
 
@@ -277,6 +294,10 @@
                     </tbody>
 
                 </table>
+
+                <p id="noResults" class="no-results" style="display: none;">
+                    No students found.
+                </p>
 
             </div>
 
@@ -401,12 +422,63 @@
 
     <script>
 
+        // ---- Show logged-in teacher's name (reads value set by login.html) ----
+
+        const loggedInUser = localStorage.getItem("loggedInUser");
+
+        if (loggedInUser) {
+
+            document.getElementById("teacherName").textContent = loggedInUser;
+            document.getElementById("welcomeName").textContent = loggedInUser;
+            document.getElementById("infoName").textContent = loggedInUser;
+
+        }
+
+
+        // ---- Logout ----
+
         function logout() {
 
             localStorage.removeItem("loggedInUser");
             localStorage.removeItem("userRole");
 
             window.location.href = "login.html";
+
+        }
+
+
+        // ---- Mobile menu toggle ----
+
+        document.getElementById("menuToggle").addEventListener("click", function () {
+
+            document.getElementById("teacherNavLinks").classList.toggle("open");
+
+        });
+
+
+        // ---- Students search / filter ----
+
+        function filterStudents() {
+
+            const input = document.getElementById("studentSearch").value.toLowerCase();
+            const rows = document.querySelectorAll("#studentsTable tbody tr");
+            let visibleCount = 0;
+
+            rows.forEach(function (row) {
+
+                const text = row.textContent.toLowerCase();
+                const isMatch = text.includes(input);
+
+                row.style.display = isMatch ? "" : "none";
+
+                if (isMatch) {
+                    visibleCount++;
+                }
+
+            });
+
+            document.getElementById("noResults").style.display =
+                visibleCount === 0 ? "block" : "none";
 
         }
 
