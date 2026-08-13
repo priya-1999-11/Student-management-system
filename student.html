@@ -25,13 +25,15 @@
         </div>
 
         <div>
-            <span id="studentName">
+
+            <span id="navStudentName">
                 Student
             </span>
 
             <button onclick="logout()">
                 Logout
             </button>
+
         </div>
 
     </nav>
@@ -161,28 +163,67 @@
                 <tbody>
 
                     <tr>
-                        <th>Student ID</th>
-                        <td>STU001</td>
+
+                        <th>
+                            Student ID
+                        </th>
+
+                        <td id="studentId">
+                            Loading...
+                        </td>
+
                     </tr>
 
-                    <tr>
-                        <th>Name</th>
-                        <td>Abdul</td>
-                    </tr>
 
                     <tr>
-                        <th>Course</th>
-                        <td>Computer Science</td>
+
+                        <th>
+                            Name
+                        </th>
+
+                        <td id="studentFullName">
+                            Loading...
+                        </td>
+
                     </tr>
 
-                    <tr>
-                        <th>Year</th>
-                        <td>Final Year</td>
-                    </tr>
 
                     <tr>
-                        <th>Email</th>
-                        <td>student@example.com</td>
+
+                        <th>
+                            Course
+                        </th>
+
+                        <td id="studentCourse">
+                            Loading...
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <th>
+                            Year
+                        </th>
+
+                        <td id="studentYear">
+                            Loading...
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <th>
+                            Email
+                        </th>
+
+                        <td id="studentEmail">
+                            Loading...
+                        </td>
+
                     </tr>
 
                 </tbody>
@@ -210,13 +251,21 @@
 
                     <tr>
 
-                        <th>Course</th>
+                        <th>
+                            Course
+                        </th>
 
-                        <th>Teacher</th>
+                        <th>
+                            Teacher
+                        </th>
 
-                        <th>Attendance</th>
+                        <th>
+                            Attendance
+                        </th>
 
-                        <th>Status</th>
+                        <th>
+                            Status
+                        </th>
 
                     </tr>
 
@@ -332,11 +381,17 @@
 
                     <tr>
 
-                        <th>Activity</th>
+                        <th>
+                            Activity
+                        </th>
 
-                        <th>Date</th>
+                        <th>
+                            Date
+                        </th>
 
-                        <th>Status</th>
+                        <th>
+                            Status
+                        </th>
 
                     </tr>
 
@@ -404,27 +459,185 @@
 
 
     <!-- =========================
-         LOGOUT
+         DATABASE / API SCRIPT
          ========================= -->
 
     <script>
 
-        const username =
-            localStorage.getItem("loggedInUser");
+        // Backend API
+        const API_URL =
+            "http://localhost:5000/api/students/1";
 
 
-        if (username) {
+        // Load student information
+        async function loadStudentData() {
 
-            document.getElementById(
-                "studentName"
-            ).textContent = username;
+            try {
 
-            document.getElementById(
-                "welcomeName"
-            ).textContent = username;
+                const response =
+                    await fetch(API_URL);
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Failed to fetch student data"
+                    );
+
+                }
+
+
+                const student =
+                    await response.json();
+
+
+                // =========================
+                // Student ID
+                // =========================
+
+                const formattedStudentId =
+                    "STU" +
+                    String(student.id)
+                        .padStart(3, "0");
+
+
+                document.getElementById(
+                    "studentId"
+                ).textContent =
+                    formattedStudentId;
+
+
+                // =========================
+                // Student Name
+                // =========================
+
+                document.getElementById(
+                    "studentFullName"
+                ).textContent =
+                    student.name;
+
+
+                document.getElementById(
+                    "navStudentName"
+                ).textContent =
+                    student.name;
+
+
+                document.getElementById(
+                    "welcomeName"
+                ).textContent =
+                    student.name;
+
+
+                // =========================
+                // Course
+                // =========================
+
+                let courseName =
+                    student.course;
+
+
+                if (student.course === "CSE") {
+
+                    courseName =
+                        "Computer Science";
+
+                }
+
+
+                document.getElementById(
+                    "studentCourse"
+                ).textContent =
+                    courseName;
+
+
+                // =========================
+                // Year
+                // =========================
+
+                let yearText =
+                    student.year;
+
+
+                if (student.year === 4) {
+
+                    yearText =
+                        "Final Year";
+
+                }
+
+
+                document.getElementById(
+                    "studentYear"
+                ).textContent =
+                    yearText;
+
+
+                // =========================
+                // Email
+                // =========================
+
+                document.getElementById(
+                    "studentEmail"
+                ).textContent =
+                    student.email;
+
+
+                // Save logged-in student name
+                // for the existing login system
+
+                localStorage.setItem(
+                    "loggedInUser",
+                    student.name
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Error loading student data:",
+                    error
+                );
+
+
+                document.getElementById(
+                    "studentId"
+                ).textContent =
+                    "Unable to load";
+
+
+                document.getElementById(
+                    "studentFullName"
+                ).textContent =
+                    "Unable to load";
+
+
+                document.getElementById(
+                    "studentCourse"
+                ).textContent =
+                    "Unable to load";
+
+
+                document.getElementById(
+                    "studentYear"
+                ).textContent =
+                    "Unable to load";
+
+
+                document.getElementById(
+                    "studentEmail"
+                ).textContent =
+                    "Unable to load";
+
+            }
 
         }
 
+
+        // =========================
+        // LOGOUT
+        // =========================
 
         function logout() {
 
@@ -440,6 +653,12 @@
                 "login.html";
 
         }
+
+
+        // Load database data
+        // when page opens
+
+        loadStudentData();
 
     </script>
 
