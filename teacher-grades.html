@@ -1,21 +1,25 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Grades - Teacher</title>
 
-    <!-- Shared project CSS -->
     <link rel="stylesheet" href="Style.css">
 
-    <!-- Teacher-specific CSS -->
     <link rel="stylesheet" href="teacher.css">
+
 </head>
 
+
 <body class="teacher-dashboard">
+
 
     <!-- =========================
          NAVIGATION
@@ -27,21 +31,44 @@
             Teacher Portal
         </div>
 
-        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+
+        <button
+            class="menu-toggle"
+            id="menuToggle"
+            aria-label="Toggle menu">
+
             ☰
+
         </button>
 
-        <div class="teacher-nav-links" id="teacherNavLinks">
 
-            <a href="teacher.html">Dashboard</a>
-            <a href="teacher-attendance.html">Attendance</a>
-            <a href="teacher-grades.html" class="active">Grades</a>
+        <div
+            class="teacher-nav-links"
+            id="teacherNavLinks">
+
+            <a href="teacher.html">
+                Dashboard
+            </a>
+
+            <a href="teacher-attendance.html">
+                Attendance
+            </a>
+
+            <a
+                href="teacher-grades.html"
+                class="active">
+
+                Grades
+
+            </a>
+
 
             <div class="teacher-nav-right">
 
                 <span id="teacherName">
                     Teacher
                 </span>
+
 
                 <button onclick="logout()">
                     Logout
@@ -54,95 +81,251 @@
     </nav>
 
 
+
     <!-- =========================
          MAIN CONTENT
          ========================= -->
 
     <main class="teacher-content">
 
+
         <h1>
             Grades
         </h1>
 
+
         <p class="teacher-subtitle">
-            Enter or update marks for each assignment.
+
+            View student grades and assignment marks.
+
         </p>
 
 
+
         <!-- =========================
-             COURSE / ASSIGNMENT SELECT
+             COURSE / ASSIGNMENT
              ========================= -->
 
         <section class="teacher-section">
 
-            <div class="teacher-info-grid attendance-controls">
+
+            <div class="teacher-info-grid">
+
 
                 <div>
-                    <strong>Course</strong>
-                    <select id="courseSelect" onchange="loadGrades()">
-                        <option value="Web Development">Web Development</option>
-                        <option value="Database Systems">Database Systems</option>
-                        <option value="Computer Networks">Computer Networks</option>
-                        <option value="Artificial Intelligence">Artificial Intelligence</option>
+
+                    <strong>
+                        Course
+                    </strong>
+
+
+                    <select
+                        id="courseSelect"
+                        onchange="loadGrades()">
+
+                        <option value="">
+                            Loading courses...
+                        </option>
+
                     </select>
+
                 </div>
 
+
+
                 <div>
-                    <strong>Assignment</strong>
-                    <select id="assignmentSelect" onchange="loadGrades()">
-                        <option value="Assignment 1">Assignment 1</option>
-                        <option value="Assignment 2">Assignment 2</option>
-                        <option value="Mid-Term">Mid-Term</option>
-                        <option value="Final Exam">Final Exam</option>
+
+                    <strong>
+                        Assignment
+                    </strong>
+
+
+                    <select
+                        id="assignmentSelect"
+                        onchange="loadGrades()">
+
+                        <option value="">
+                            Loading assignments...
+                        </option>
+
                     </select>
+
                 </div>
+
 
             </div>
+
 
         </section>
 
 
+
         <!-- =========================
-             GRADES TABLE
+             STUDENT MARKS
              ========================= -->
 
         <section class="teacher-section">
+
 
             <h2>
                 Student Marks
             </h2>
 
+
             <div class="table-container">
 
+
                 <table id="gradesTable">
+
 
                     <thead>
 
                         <tr>
-                            <th>Student ID</th>
-                            <th>Name</th>
-                            <th>Marks (out of 100)</th>
+
+                            <th>
+                                Student ID
+                            </th>
+
+                            <th>
+                                Name
+                            </th>
+
+                            <th>
+                                Course
+                            </th>
+
+                            <th>
+                                Marks
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
                         </tr>
 
                     </thead>
 
+
                     <tbody>
-                        <!-- Rows are generated by JavaScript below -->
+
+                        <tr>
+
+                            <td colspan="5">
+                                Loading grades...
+                            </td>
+
+                        </tr>
+
                     </tbody>
+
 
                 </table>
 
+
+                <p
+                    id="noResults"
+                    class="no-results"
+                    style="display:none;">
+
+                    No grade records found.
+
+                </p>
+
+
             </div>
 
-            <button class="primary-btn save-btn" onclick="saveGrades()">
-                Save Grades
-            </button>
-
-            <p id="saveMessage" class="save-message"></p>
 
         </section>
 
+
+
+        <!-- =========================
+             GRADE SUMMARY
+             ========================= -->
+
+        <section class="teacher-section">
+
+
+            <h2>
+                Grade Summary
+            </h2>
+
+
+            <div class="teacher-info-grid">
+
+
+                <div>
+
+                    <strong>
+                        Students
+                    </strong>
+
+                    <p id="summaryStudents">
+                        0
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Graded
+                    </strong>
+
+                    <p id="summaryGraded">
+                        0
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Average Marks
+                    </strong>
+
+                    <p id="summaryAverage">
+                        0
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Highest Marks
+                    </strong>
+
+                    <p id="summaryHighest">
+                        0
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================
+             MESSAGE
+             ========================= -->
+
+        <p
+            id="saveMessage"
+            class="save-message">
+        </p>
+
+
     </main>
+
 
 
     <!-- =========================
@@ -151,138 +334,916 @@
 
     <script>
 
-        // ---- Show logged-in teacher's name ----
 
-        const loggedInUser = localStorage.getItem("loggedInUser");
+        // =====================================
+        // Backend API
+        // =====================================
 
-        if (loggedInUser) {
-            document.getElementById("teacherName").textContent = loggedInUser;
+        const API_BASE =
+            "http://localhost:5000/api";
+
+
+        // =====================================
+        // Teacher ID
+        // =====================================
+
+        const teacherId = 1;
+
+
+        // =====================================
+        // Data
+        // =====================================
+
+        let teacherData = null;
+
+        let coursesData = [];
+
+        let studentsData = [];
+
+        let assignmentsData = [];
+
+        let gradesData = [];
+
+
+
+        // =====================================
+        // Fetch API
+        // =====================================
+
+        async function fetchAPI(url) {
+
+            const response =
+                await fetch(url);
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    `API request failed: ${response.status}`
+                );
+
+            }
+
+
+            return await response.json();
+
         }
 
+
+
+        // =====================================
+        // Load Teacher
+        // =====================================
+
+        async function loadTeacher() {
+
+            teacherData =
+                await fetchAPI(
+                    `${API_BASE}/teachers/${teacherId}`
+                );
+
+
+            document.getElementById(
+                "teacherName"
+            ).textContent =
+                teacherData.name;
+
+        }
+
+
+
+        // =====================================
+        // Load Courses
+        // =====================================
+
+        async function loadCourses() {
+
+            coursesData =
+                await fetchAPI(
+                    `${API_BASE}/teachers/${teacherId}/courses`
+                );
+
+
+            const select =
+                document.getElementById(
+                    "courseSelect"
+                );
+
+
+            select.innerHTML = "";
+
+
+            if (coursesData.length === 0) {
+
+                select.innerHTML = `
+
+                    <option value="">
+                        No courses available
+                    </option>
+
+                `;
+
+                return;
+
+            }
+
+
+            coursesData.forEach(function(course) {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                option.value =
+                    course.id;
+
+
+                option.textContent =
+                    course.course_name;
+
+
+                select.appendChild(option);
+
+            });
+
+        }
+
+
+
+        // =====================================
+        // Load Students
+        // =====================================
+
+        async function loadStudents() {
+
+            studentsData =
+                await fetchAPI(
+                    `${API_BASE}/teachers/${teacherId}/students`
+                );
+
+        }
+
+
+
+        // =====================================
+        // Load Assignments
+        // =====================================
+
+        async function loadAssignments() {
+
+            assignmentsData =
+                await fetchAPI(
+                    `${API_BASE}/teachers/${teacherId}/assignments`
+                );
+
+
+            updateAssignmentDropdown();
+
+        }
+
+
+
+        // =====================================
+        // Update Assignment Dropdown
+        // =====================================
+
+        function updateAssignmentDropdown() {
+
+            const courseId =
+                document.getElementById(
+                    "courseSelect"
+                ).value;
+
+
+            const select =
+                document.getElementById(
+                    "assignmentSelect"
+                );
+
+
+            select.innerHTML = "";
+
+
+            const filteredAssignments =
+                assignmentsData.filter(
+                    function(assignment) {
+
+                        return Number(
+                            assignment.course_id
+                        ) === Number(
+                            courseId
+                        );
+
+                    }
+                );
+
+
+            if (
+                filteredAssignments.length === 0
+            ) {
+
+                select.innerHTML = `
+
+                    <option value="">
+                        No assignments available
+                    </option>
+
+                `;
+
+                return;
+
+            }
+
+
+            filteredAssignments.forEach(
+                function(assignment) {
+
+                    const option =
+                        document.createElement(
+                            "option"
+                        );
+
+
+                    option.value =
+                        assignment.id;
+
+
+                    option.textContent =
+                        assignment.title;
+
+
+                    select.appendChild(option);
+
+                }
+            );
+
+        }
+
+
+
+        // =====================================
+        // Load Grades
+        // =====================================
+
+        async function loadGrades() {
+
+            const courseSelect =
+                document.getElementById(
+                    "courseSelect"
+                );
+
+
+            const assignmentSelect =
+                document.getElementById(
+                    "assignmentSelect"
+                );
+
+
+            const courseId =
+                courseSelect.value;
+
+
+            if (!courseId) {
+                return;
+            }
+
+
+            // Rebuild assignments according
+            // to selected course
+
+            updateAssignmentDropdown();
+
+
+            const assignmentId =
+                assignmentSelect.value;
+
+
+            if (!assignmentId) {
+
+                renderEmptyGrades();
+
+                return;
+
+            }
+
+
+            try {
+
+                gradesData =
+                    await fetchAPI(
+                        `${API_BASE}/teachers/${teacherId}/grades`
+                    );
+
+
+                renderGrades(
+                    courseId,
+                    assignmentId
+                );
+
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Failed to load grades:",
+                    error
+                );
+
+
+                document.querySelector(
+                    "#gradesTable tbody"
+                ).innerHTML = `
+
+                    <tr>
+
+                        <td colspan="5">
+
+                            Failed to load grades.
+
+                            Make sure the backend
+                            server is running.
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }
+
+        }
+
+
+
+        // =====================================
+        // Render Grades
+        // =====================================
+
+        function renderGrades(
+            courseId,
+            assignmentId
+        ) {
+
+            const tbody =
+                document.querySelector(
+                    "#gradesTable tbody"
+                );
+
+
+            const noResults =
+                document.getElementById(
+                    "noResults"
+                );
+
+
+            tbody.innerHTML = "";
+
+
+            /*
+             * Find the selected assignment.
+             */
+
+            const assignment =
+                assignmentsData.find(
+                    function(item) {
+
+                        return Number(item.id) ===
+                            Number(assignmentId);
+
+                    }
+                );
+
+
+            if (!assignment) {
+
+                renderEmptyGrades();
+
+                return;
+
+            }
+
+
+            /*
+             * Students belonging to the
+             * selected course.
+             */
+
+            const courseName =
+                assignment.course_name;
+
+
+            const courseStudents =
+                studentsData.filter(
+                    function(student) {
+
+                        return student.course ===
+                            courseName;
+
+                    }
+                );
+
+
+            /*
+             * Grades belonging to the
+             * selected assignment.
+             */
+
+            const assignmentGrades =
+                gradesData.filter(
+                    function(grade) {
+
+                        return Number(
+                            grade.assignment_id
+                        ) === Number(
+                            assignmentId
+                        );
+
+                    }
+                );
+
+
+            /*
+             * If there are no students.
+             */
+
+            if (courseStudents.length === 0) {
+
+                noResults.style.display =
+                    "block";
+
+                updateSummary([]);
+
+                return;
+
+            }
+
+
+            noResults.style.display =
+                "none";
+
+
+            /*
+             * Create one row per student.
+             */
+
+            courseStudents.forEach(
+                function(student) {
+
+
+                    const grade =
+                        assignmentGrades.find(
+                            function(item) {
+
+                                return Number(
+                                    item.student_id
+                                ) === Number(
+                                    student.id
+                                );
+
+                            }
+                        );
+
+
+                    const row =
+                        document.createElement(
+                            "tr"
+                        );
+
+
+                    let marks = "-";
+
+                    let status = "Not Graded";
+
+
+                    if (grade) {
+
+                        marks =
+                            Number(
+                                grade.marks
+                            ).toFixed(2);
+
+
+                        status =
+                            "Graded";
+
+                    }
+
+
+                    row.innerHTML = `
+
+                        <td>
+                            STU${String(
+                                student.id
+                            ).padStart(3, "0")}
+                        </td>
+
+                        <td>
+                            ${escapeHTML(
+                                student.name
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHTML(
+                                student.course
+                            )}
+                        </td>
+
+                        <td>
+                            ${marks}
+                        </td>
+
+                        <td>
+                            ${status}
+                        </td>
+
+                    `;
+
+
+                    tbody.appendChild(row);
+
+                }
+            );
+
+
+            updateSummary(
+                courseStudents.map(
+                    function(student) {
+
+                        return assignmentGrades.find(
+                            function(grade) {
+
+                                return Number(
+                                    grade.student_id
+                                ) === Number(
+                                    student.id
+                                );
+
+                            }
+                        );
+
+                    }
+                ).filter(Boolean)
+            );
+
+        }
+
+
+
+        // =====================================
+        // Empty Grades
+        // =====================================
+
+        function renderEmptyGrades() {
+
+            const tbody =
+                document.querySelector(
+                    "#gradesTable tbody"
+                );
+
+
+            tbody.innerHTML = `
+
+                <tr>
+
+                    <td colspan="5">
+
+                        No grade records found.
+
+                    </td>
+
+                </tr>
+
+            `;
+
+
+            updateSummary([]);
+
+        }
+
+
+
+        // =====================================
+        // Grade Summary
+        // =====================================
+
+        function updateSummary(grades) {
+
+            const graded =
+                grades.length;
+
+
+            let totalMarks = 0;
+
+            let highest = 0;
+
+
+            grades.forEach(function(grade) {
+
+                const marks =
+                    Number(grade.marks);
+
+
+                if (!isNaN(marks)) {
+
+                    totalMarks += marks;
+
+
+                    if (marks > highest) {
+                        highest = marks;
+                    }
+
+                }
+
+            });
+
+
+            const average =
+                graded > 0
+                    ? (
+                        totalMarks / graded
+                    ).toFixed(2)
+                    : "0";
+
+
+            document.getElementById(
+                "summaryStudents"
+            ).textContent =
+                getSelectedCourseStudentCount();
+
+
+            document.getElementById(
+                "summaryGraded"
+            ).textContent =
+                graded;
+
+
+            document.getElementById(
+                "summaryAverage"
+            ).textContent =
+                average;
+
+
+            document.getElementById(
+                "summaryHighest"
+            ).textContent =
+                highest.toFixed(2);
+
+        }
+
+
+
+        // =====================================
+        // Selected Course Student Count
+        // =====================================
+
+        function getSelectedCourseStudentCount() {
+
+            const courseSelect =
+                document.getElementById(
+                    "courseSelect"
+                );
+
+
+            const course =
+                coursesData.find(
+                    function(item) {
+
+                        return Number(item.id) ===
+                            Number(
+                                courseSelect.value
+                            );
+
+                    }
+                );
+
+
+            if (!course) {
+                return 0;
+            }
+
+
+            return studentsData.filter(
+                function(student) {
+
+                    return student.course ===
+                        course.course_name;
+
+                }
+            ).length;
+
+        }
+
+
+
+        // =====================================
+        // Escape HTML
+        // =====================================
+
+        function escapeHTML(value) {
+
+            if (
+                value === null ||
+                value === undefined
+            ) {
+
+                return "";
+
+            }
+
+
+            return String(value)
+
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+
+        // =====================================
+        // Logout
+        // =====================================
 
         function logout() {
 
-            localStorage.removeItem("loggedInUser");
-            localStorage.removeItem("userRole");
-
-            window.location.href = "login.html";
-
-        }
-
-
-        document.getElementById("menuToggle").addEventListener("click", function () {
-
-            document.getElementById("teacherNavLinks").classList.toggle("open");
-
-        });
-
-
-        // ---- Mock student list per course ----
-        // Replace this with real API data once the backend is connected.
-        // Keep this list in sync with teacher-attendance.html.
-
-        const studentsByCourse = {
-
-            "Web Development": [
-                { id: "STU001", name: "Abdul" },
-                { id: "STU005", name: "Kiran" },
-                { id: "STU006", name: "Meena" }
-            ],
-
-            "Database Systems": [
-                { id: "STU002", name: "Rahul" },
-                { id: "STU007", name: "Divya" }
-            ],
-
-            "Computer Networks": [
-                { id: "STU003", name: "Priya" },
-                { id: "STU008", name: "Arjun" }
-            ],
-
-            "Artificial Intelligence": [
-                { id: "STU004", name: "Sneha" },
-                { id: "STU009", name: "Vikram" }
-            ]
-
-        };
-
-
-        // ---- Build the storage key for course + assignment ----
-
-        function getStorageKey() {
-
-            const course = document.getElementById("courseSelect").value;
-            const assignment = document.getElementById("assignmentSelect").value;
-
-            return "grades_" + course + "_" + assignment;
-
-        }
-
-
-        // ---- Render the table for the selected course + assignment ----
-
-        function loadGrades() {
-
-            const course = document.getElementById("courseSelect").value;
-            const students = studentsByCourse[course] || [];
-
-            const saved = JSON.parse(
-                localStorage.getItem(getStorageKey()) || "{}"
+            localStorage.removeItem(
+                "loggedInUser"
             );
 
-            const tbody = document.querySelector("#gradesTable tbody");
-            tbody.innerHTML = "";
 
-            students.forEach(function (student) {
+            localStorage.removeItem(
+                "userRole"
+            );
 
-                const mark = saved[student.id] !== undefined ? saved[student.id] : "";
 
-                const row = document.createElement("tr");
-
-                row.innerHTML =
-                    "<td>" + student.id + "</td>" +
-                    "<td>" + student.name + "</td>" +
-                    "<td>" +
-                        "<input type='number' min='0' max='100' " +
-                        "data-student-id='" + student.id + "' value='" + mark + "'>" +
-                    "</td>";
-
-                tbody.appendChild(row);
-
-            });
+            window.location.href =
+                "login.html";
 
         }
 
 
-        // ---- Save grades for the selected course + assignment ----
 
-        function saveGrades() {
+        // =====================================
+        // Mobile Menu
+        // =====================================
 
-            const inputs = document.querySelectorAll("#gradesTable input[data-student-id]");
-            const data = {};
+        document
+            .getElementById("menuToggle")
+            .addEventListener(
+                "click",
+                function() {
 
-            inputs.forEach(function (input) {
-                data[input.getAttribute("data-student-id")] = input.value;
-            });
+                    document
+                        .getElementById(
+                            "teacherNavLinks"
+                        )
+                        .classList
+                        .toggle("open");
 
-            localStorage.setItem(getStorageKey(), JSON.stringify(data));
+                }
+            );
 
-            const message = document.getElementById("saveMessage");
-            message.textContent = "Grades saved.";
 
-            setTimeout(function () {
-                message.textContent = "";
-            }, 2500);
+
+        // =====================================
+        // Course Change
+        // =====================================
+
+        document
+            .getElementById("courseSelect")
+            .addEventListener(
+                "change",
+                function() {
+
+                    updateAssignmentDropdown();
+
+                    loadGrades();
+
+                }
+            );
+
+
+
+        // =====================================
+        // Initial Page Load
+        // =====================================
+
+        async function initializePage() {
+
+            try {
+
+                await loadTeacher();
+
+                await loadCourses();
+
+                await loadStudents();
+
+                await loadAssignments();
+
+                await loadGrades();
+
+
+                console.log(
+                    "Grades page loaded successfully."
+                );
+
+
+                console.log(
+                    "Teacher:",
+                    teacherData
+                );
+
+
+                console.log(
+                    "Courses:",
+                    coursesData
+                );
+
+
+                console.log(
+                    "Students:",
+                    studentsData
+                );
+
+
+                console.log(
+                    "Assignments:",
+                    assignmentsData
+                );
+
+
+                console.log(
+                    "Grades:",
+                    gradesData
+                );
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Grades page initialization failed:",
+                    error
+                );
+
+
+                document.querySelector(
+                    "#gradesTable tbody"
+                ).innerHTML = `
+
+                    <tr>
+
+                        <td colspan="5">
+
+                            Unable to load grades.
+
+                            Please make sure the
+                            backend server is running.
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }
 
         }
 
 
-        // ---- Initial load ----
+        document.addEventListener(
+            "DOMContentLoaded",
+            initializePage
+        );
 
-        loadGrades();
 
     </script>
 
 </body>
 
 </html>
+```
