@@ -1,8 +1,8 @@
 require("dotenv").config();
 
 const express = require("express");
-const mysql = require("mysql2");
 const cors = require("cors");
+const { createClient } = require("@supabase/supabase-js");
 
 const app = express();
 
@@ -15,38 +15,15 @@ app.use(express.json());
 
 
 // ===============================
-// MySQL Database Connection
+// Supabase Connection
 // ===============================
 
-const db = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    port: process.env.DB_PORT
-});
+const supabase = createClient(
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_KEY
+);
 
-
-// ===============================
-// Connect to MySQL
-// ===============================
-
-db.connect((err) => {
-
-    if (err) {
-        console.error(
-            "❌ MySQL connection failed:",
-            err.message
-        );
-
-        return;
-    }
-
-    console.log(
-        "✅ Connected to student_management database!"
-    );
-
-});
+console.log("✅ Supabase client initialized");
 
 
 // ===============================
@@ -56,7 +33,7 @@ db.connect((err) => {
 app.get("/", (req, res) => {
 
     res.send(
-        "Student Management Backend is running!"
+        "Student Management Backend is running with Supabase!"
     );
 
 });
@@ -66,28 +43,39 @@ app.get("/", (req, res) => {
 // Get All Students
 // ===============================
 
-app.get("/api/students", (req, res) => {
+app.get("/api/students", async (req, res) => {
 
-    const sql = "SELECT * FROM students";
+    try {
 
-    db.query(sql, (err, results) => {
+        const { data, error } = await supabase
+            .from("students")
+            .select("*");
 
-        if (err) {
+        if (error) {
 
             console.error(
-                "❌ Database query failed:",
-                err.message
+                "❌ Supabase query failed:",
+                error.message
             );
 
             return res.status(500).json({
-                error: "Database query failed"
+                error: "Database query failed",
+                details: error.message
             });
 
         }
 
-        res.json(results);
+        res.json(data);
 
-    });
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            error: "Server error"
+        });
+
+    }
 
 });
 
@@ -96,32 +84,21 @@ app.get("/api/students", (req, res) => {
 // Get Student By ID
 // ===============================
 
-app.get("/api/students/:id", (req, res) => {
+app.get("/api/students/:id", async (req, res) => {
 
-    const studentId = req.params.id;
+    try {
 
-    const sql =
-        "SELECT * FROM students WHERE id = ?";
+        const studentId = req.params.id;
 
-    db.query(
-        sql,
-        [studentId],
-        (err, results) => {
+        const { data, error } = await supabase
+            .from("students")
+            .select("*")
+            .eq("id", studentId)
+            .single();
 
-            if (err) {
+        if (error) {
 
-                console.error(
-                    "❌ Database query failed:",
-                    err.message
-                );
-
-                return res.status(500).json({
-                    error: "Database query failed"
-                });
-
-            }
-
-            if (results.length === 0) {
+            if (error.code === "PGRST116") {
 
                 return res.status(404).json({
                     message: "Student not found"
@@ -129,10 +106,29 @@ app.get("/api/students/:id", (req, res) => {
 
             }
 
-            res.json(results[0]);
+            console.error(
+                "❌ Supabase query failed:",
+                error.message
+            );
+
+            return res.status(500).json({
+                error: "Database query failed",
+                details: error.message
+            });
 
         }
-    );
+
+        res.json(data);
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            error: "Server error"
+        });
+
+    }
 
 });
 
@@ -141,56 +137,61 @@ app.get("/api/students/:id", (req, res) => {
 // Add New Student
 // ===============================
 
-app.post("/api/students", (req, res) => {
+app.post("/api/students", async (req, res) => {
 
-    const {
-        name,
-        email,
-        course,
-        year
-    } = req.body;
+    try {
 
-    const sql = `
-        INSERT INTO students
-        (name, email, course, year)
-        VALUES (?, ?, ?, ?)
-    `;
-
-    db.query(
-        sql,
-        [
+        const {
             name,
             email,
             course,
             year
-        ],
-        (err, result) => {
+        } = req.body;
 
-            if (err) {
+        const { data, error } = await supabase
+            .from("students")
+            .insert([
+                {
+                    name,
+                    email,
+                    course,
+                    year
+                }
+            ])
+            .select()
+            .single();
 
-                console.error(
-                    "❌ Insert failed:",
-                    err.message
-                );
+        if (error) {
 
-                return res.status(500).json({
-                    error: "Failed to add student"
-                });
+            console.error(
+                "❌ Insert failed:",
+                error.message
+            );
 
-            }
-
-            res.status(201).json({
-
-                message:
-                    "Student added successfully",
-
-                studentId:
-                    result.insertId
-
+            return res.status(500).json({
+                error: "Failed to add student",
+                details: error.message
             });
 
         }
-    );
+
+        res.status(201).json({
+
+            message: "Student added successfully",
+
+            student: data
+
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            error: "Server error"
+        });
+
+    }
 
 });
 
@@ -199,53 +200,55 @@ app.post("/api/students", (req, res) => {
 // Delete Student
 // ===============================
 
-app.delete(
-    "/api/students/:id",
-    (req, res) => {
+app.delete("/api/students/:id", async (req, res) => {
+
+    try {
 
         const studentId = req.params.id;
 
-        const sql =
-            "DELETE FROM students WHERE id = ?";
+        const { data, error } = await supabase
+            .from("students")
+            .delete()
+            .eq("id", studentId)
+            .select();
 
-        db.query(
-            sql,
-            [studentId],
-            (err, result) => {
+        if (error) {
 
-                if (err) {
+            console.error(
+                "❌ Delete failed:",
+                error.message
+            );
 
-                    console.error(
-                        "❌ Delete failed:",
-                        err.message
-                    );
+            return res.status(500).json({
+                error: "Failed to delete student",
+                details: error.message
+            });
 
-                    return res.status(500).json({
-                        error:
-                            "Failed to delete student"
-                    });
+        }
 
-                }
+        if (!data || data.length === 0) {
 
-                if (result.affectedRows === 0) {
+            return res.status(404).json({
+                message: "Student not found"
+            });
 
-                    return res.status(404).json({
-                        message:
-                            "Student not found"
-                    });
+        }
 
-                }
+        res.json({
+            message: "Student deleted successfully"
+        });
 
-                res.json({
-                    message:
-                        "Student deleted successfully"
-                });
+    } catch (error) {
 
-            }
-        );
+        console.error(error);
+
+        res.status(500).json({
+            error: "Server error"
+        });
 
     }
-);
+
+});
 
 
 // ===============================
