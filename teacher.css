@@ -1,0 +1,375 @@
+/* =========================================
+   TEACHER DASHBOARD
+   ========================================= */
+
+.teacher-dashboard {
+    min-height: 100vh;
+    background: #f4f6f8;
+}
+
+
+/* =========================================
+   TEACHER NAVBAR
+   ========================================= */
+
+.teacher-nav {
+    background: white;
+
+    padding: 18px 7%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+
+    position: relative;
+}
+
+.teacher-nav .logo {
+    color: #2563eb;
+}
+
+.teacher-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.teacher-nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.teacher-nav-links a:hover,
+.teacher-nav-links a.active {
+    color: #2563eb;
+}
+
+.teacher-nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.teacher-nav-right button {
+    border: none;
+
+    background: #dc2626;
+    color: white;
+
+    padding: 10px 18px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+.teacher-nav-right button:hover {
+    background: #b91c1c;
+}
+
+
+/* =========================================
+   MOBILE MENU TOGGLE
+   ========================================= */
+
+.menu-toggle {
+    display: none;
+
+    border: none;
+    background: none;
+
+    font-size: 26px;
+
+    cursor: pointer;
+
+    color: #2563eb;
+}
+
+
+/* =========================================
+   CONTENT
+   ========================================= */
+
+.teacher-content {
+    max-width: 1400px;
+
+    margin: auto;
+
+    padding: 40px 7%;
+}
+
+.teacher-content h1 {
+    font-size: 34px;
+
+    margin-bottom: 10px;
+}
+
+.teacher-subtitle {
+    color: #666;
+
+    font-size: 17px;
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================================
+   STATISTICS
+   ========================================= */
+
+.teacher-stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 20px;
+
+    margin-bottom: 30px;
+}
+
+.teacher-stat-card {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.07);
+}
+
+.teacher-stat-card h3 {
+    font-size: 16px;
+
+    color: #555;
+
+    margin-bottom: 10px;
+}
+
+.teacher-stat-number {
+    font-size: 32px;
+
+    font-weight: bold;
+
+    color: #2563eb;
+}
+
+
+/* =========================================
+   SECTIONS
+   ========================================= */
+
+.teacher-section {
+    margin-bottom: 30px;
+}
+
+.teacher-section>h2 {
+    font-size: 22px;
+
+    margin-bottom: 15px;
+}
+
+
+/* =========================================
+   TEACHER INFORMATION
+   ========================================= */
+
+.teacher-info-grid {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 20px;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.teacher-info-grid strong {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #333;
+}
+
+.teacher-info-grid p {
+    color: #666;
+}
+
+/* Attendance / Grades page uses the same grid for its two controls */
+
+.attendance-controls {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.teacher-info-grid select,
+.teacher-info-grid input[type="date"] {
+    width: 100%;
+
+    padding: 10px;
+
+    border: 1px solid #ddd;
+    border-radius: 6px;
+
+    font-size: 15px;
+}
+
+
+/* =========================================
+   TABLE
+   ========================================= */
+
+.teacher-section .table-container {
+    margin-top: 0;
+}
+
+#attendanceTable select,
+#gradesTable input[type="number"] {
+    padding: 8px;
+
+    border: 1px solid #ddd;
+    border-radius: 6px;
+
+    font-size: 14px;
+}
+
+#gradesTable input[type="number"] {
+    width: 90px;
+}
+
+
+/* =========================================
+   SEARCH BOX
+   ========================================= */
+
+.search-box {
+    width: 100%;
+
+    padding: 12px 15px;
+
+    margin-bottom: 15px;
+
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+    font-size: 15px;
+}
+
+.no-results {
+    color: #888;
+
+    padding: 15px 0;
+
+    text-align: center;
+}
+
+
+/* =========================================
+   SAVE BUTTON / MESSAGE
+   ========================================= */
+
+.save-btn {
+    margin-top: 20px;
+}
+
+.save-message {
+    display: inline-block;
+
+    margin-left: 15px;
+
+    color: #16a34a;
+
+    font-weight: 500;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 1000px) {
+
+    .teacher-stats {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .teacher-info-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .teacher-nav {
+        padding: 15px 5%;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .teacher-nav-links {
+        display: none;
+
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 15px;
+
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+
+        background: white;
+
+        padding: 20px 5%;
+
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .teacher-nav-links.open {
+        display: flex;
+    }
+
+    .teacher-nav-right {
+        width: 100%;
+
+        justify-content: space-between;
+    }
+
+    .teacher-content {
+        padding: 30px 5%;
+    }
+
+    .teacher-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .teacher-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .attendance-controls {
+        grid-template-columns: 1fr;
+    }
+
+}
